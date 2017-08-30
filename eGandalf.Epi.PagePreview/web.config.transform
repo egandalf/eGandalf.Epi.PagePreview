@@ -1,0 +1,11 @@
+﻿<configuration>
+  <episerver.shell>
+    <protectedModules>
+      <add name="eGandalf.Epi.PagePreview">
+        <assemblies>
+          <add assembly="eGandalf.Epi.PagePreview"/>
+        </assemblies>
+      </add>
+    </protectedModules>
+  </episerver.shell>
+</configuration>

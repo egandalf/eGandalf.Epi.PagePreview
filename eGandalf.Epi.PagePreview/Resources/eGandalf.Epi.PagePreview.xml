@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<languages>
+  <language name="English" id="en">
+    <egandalf>
+      <pagepreview>
+        <componentTitle>Page Preview</componentTitle>
+        <componentDescription>Provides an option for viewing the current content revision in a new tab.</componentDescription>
+        <header>Preview</header>
+        <instructions>This preview option will open a new tab with the current draft of content.</instructions>
+        <button>Open Preview</button>
+        <errorheader>Unavailable</errorheader>
+        <errormessage>Page Preview is only available for Page content.</errormessage>
+      </pagepreview>
+    </egandalf>
+  </language>
+</languages>

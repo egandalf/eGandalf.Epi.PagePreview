@@ -1,0 +1,14 @@
+﻿.eg-preview {
+    text-align: center;
+}
+
+    .eg-preview a.eg-btn {
+        color: #fff;
+        background: #f7542b;
+        display: inline-block;
+        padding: 10px 25px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        letter-spacing: 0.25px;
+        font-size: 16pt;
+    }

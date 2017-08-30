@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>eGandalf.Epi.PagePreview</id>
+    <version>1.0.0</version>
+    <authors>James Stout (@egandalf)</authors>
+    <owners>Episerver</owners>
+    <projectUrl>https://github.com/egandalf/eGandalf.Epi.PagePreview</projectUrl>
+    <iconUrl>http://2.bp.blogspot.com/-XP05TFuM8_o/V__1KyDB5mI/AAAAAAAAH0c/ltOfeZjaDjQqNB0YEvSARWl6ZGQjdk7ugCK4B/s80/egandalf.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An Episerver v10-compatible rewrite of Jacob Khan's code (https://world.episerver.com/blogs/Jacob-Khan/Dates/2016/4/preview-content-in-view-mode/).</description>
+    <summary>Adds a partial router allowing draft or prior-versions of page content to be previewed without the authoring UI in a separate browser tab. Can support unpublished version preview for non-authenticated users.</summary>
+    <releaseNotes>Initial release of package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>EPiServerModulePackage Preview</tags>
+    <dependencies>
+      <dependency id="EPiServer.CMS.Core" version="10.0.1" />
+      <dependency id="Castle.Core" version="3.3.3" />
+      <dependency id="EPiServer.CMS.UI.Core" version="10.0.2" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin/Release/eGandalf.Epi.PagePreview.dll" target="lib\net45" />
+    <file src="eGandalf.Epi.PagePreview.zip" target="content\modules\_protected\eGandalf.Epi.PagePreview\" />
+    <file src="web.config" target="content\modules\_protected\eGandalf.Epi.PagePreview\"/>
+    <file src="web.config.transform" target="content\"/>
+    <file src="Resources\*.xml" target="content\Resources\LanguageFiles\"/>
+  </files>
+</package>
