@@ -67,7 +67,8 @@ namespace Multisite.Business.PagePreview
 ```C#
 public bool IsAllowed()
 {
-    return HttpContext.Current.User.IsInRole("Administrators");
+    // Note that this role must have Read / Change permissions on the content to be previewed.
+    return HttpContext.Current.User.IsInRole("Previewers");
 }
 ```
 3. Use Episerver's Initialization interface to override my implementation with your own.
