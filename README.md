@@ -82,6 +82,7 @@ using EPiServer.ServiceLocation.Compatibility;
 namespace Multisite.Business.PagePreview
 {
     [InitializableModule]
+    [ModuleDependency(typeof(ServiceContainerInitialization))]
     public class PagePreviewInitialization : IConfigurableModule
     {
         public void ConfigureContainer(ServiceConfigurationContext context)
