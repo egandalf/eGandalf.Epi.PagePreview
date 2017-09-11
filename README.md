@@ -97,3 +97,15 @@ namespace Multisite.Business.PagePreview
     }
 }
 ```
+
+## Troubleshooting
+
+If you load the widget/component in a page context and you see a button with text 'undefined', then you are likely missing a localization provider. Look for something similar to this in your `web.config` inside of the `<episerver.framework>` section:
+
+```xml
+<localization fallbackBehavior="Echo, FallbackCulture" fallbackCulture="en">
+  <providers>
+    <add name="languageFiles" virtualPath="~/Resources/LanguageFiles" type="EPiServer.Framework.Localization.XmlResources.FileXmlLocalizationProvider, EPiServer.Framework"/>
+  </providers>
+</localization>
+```
