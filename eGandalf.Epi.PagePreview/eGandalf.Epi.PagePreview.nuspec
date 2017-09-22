@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>eGandalf.Epi.PagePreview</id>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <authors>James Stout (@egandalf)</authors>
     <owners>Episerver</owners>
     <projectUrl>https://github.com/egandalf/eGandalf.Epi.PagePreview</projectUrl>

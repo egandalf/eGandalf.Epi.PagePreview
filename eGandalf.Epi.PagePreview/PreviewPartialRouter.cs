@@ -5,6 +5,7 @@ using EPiServer.Editor;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
 using EPiServer.Web.Routing.Segments;
+using System.Text.RegularExpressions;
 using System.Web.Routing;
 
 namespace eGandalf.Epi.PagePreview
@@ -32,6 +33,9 @@ namespace eGandalf.Epi.PagePreview
 
             var versionSegment = TryGetVersionSegment(segmentContext);
             if (string.IsNullOrEmpty(versionSegment)) return null;
+
+            var re = new Regex("^[0-9]{1,10}_[0-9]{1,10}$");
+            if (!re.IsMatch(versionSegment)) return null;
 
             var workId = new ContentReference(versionSegment);
             if (workId == null || workId.Equals(ContentReference.EmptyReference)) return null;
