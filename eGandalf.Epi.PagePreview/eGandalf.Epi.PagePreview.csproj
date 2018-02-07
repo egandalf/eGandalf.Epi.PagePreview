@@ -173,12 +173,13 @@
     <Compile Include="IPagePreview.cs" />
     <Compile Include="LocalizedComponentAttribute.cs" />
     <Compile Include="PagePreview.cs" />
+    <Compile Include="PagePreviewModule.cs" />
     <Compile Include="PreviewPartialRouter.cs" />
     <Compile Include="PreviewRouterInitialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="eGandalf.Epi.PagePreview\module.config">
+    <None Include="module.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -189,7 +190,7 @@
     <Content Include="eGandalf.Epi.PagePreview\ClientResources\css\styles.css" />
     <Content Include="eGandalf.Epi.PagePreview\ClientResources\PagePreview.js" />
     <Content Include="eGandalf.Epi.PagePreview\ClientResources\templates\PreviewControl.html" />
-    <Content Include="Resources\eGandalf.Epi.PagePreview.xml" />
+    <EmbeddedResource Include="EmbeddedLangFiles\eGandalf.Epi.PagePreview.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

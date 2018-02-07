@@ -11,6 +11,7 @@
     function (declare, lang, html, _TemplatedMixin, _WidgetBase, _ContentContextMixin, resources, template) {
         return declare("egandalf/PagePreview", [_WidgetBase, _TemplatedMixin, _ContentContextMixin], {
             templateString: template,
+            resources: resources,
             postCreate: function () {
                 var self = this;
                 dojo.when(this.getCurrentContext(), function (context) {

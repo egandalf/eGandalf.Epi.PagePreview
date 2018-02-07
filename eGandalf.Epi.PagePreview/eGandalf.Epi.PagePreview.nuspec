@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>eGandalf.Epi.PagePreview</id>
-    <version>2.0.1</version>
+    <version>2.0.5</version>
     <authors>James Stout (@egandalf)</authors>
     <owners>Episerver</owners>
     <projectUrl>https://github.com/egandalf/eGandalf.Epi.PagePreview</projectUrl>
@@ -23,7 +23,8 @@
     <file src="bin/Release/eGandalf.Epi.PagePreview.dll" target="lib\net461" />
     <file src="eGandalf.Epi.PagePreview.zip" target="content\modules\_protected\eGandalf.Epi.PagePreview\" />
     <file src="web.config" target="content\modules\_protected\eGandalf.Epi.PagePreview\"/>
+    <file src="module.config" target="content\modules\_protected\eGandalf.Epi.PagePreview\"/>
     <file src="web.config.transform" target="content\"/>
-    <file src="Resources\*.xml" target="content\Resources\LanguageFiles\"/>
+    <file src="EmbeddedLangFiles\" target="content\modules\_protected\eGandalf.Epi.PagePreview\EmbeddedLangFiles\"/>
   </files>
 </package>
