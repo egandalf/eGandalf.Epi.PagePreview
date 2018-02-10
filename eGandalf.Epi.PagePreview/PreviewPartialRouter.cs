@@ -10,7 +10,7 @@ using System.Web.Routing;
 
 namespace eGandalf.Epi.PagePreview
 {
-    public class PreviewPartialRouter : IPartialRouter<PageData, ContentVersion>
+    public class PreviewPartialRouter : IPartialRouter<IContent, ContentVersion>
     {
         private Injected<IContentLoader> _contentLoader;
         private Injected<IPagePreview> _pagePreview;
@@ -27,20 +27,22 @@ namespace eGandalf.Epi.PagePreview
             };
         }
 
-        public object RoutePartial(PageData content, SegmentContext segmentContext)
-        {
-            if (!_pagePreview.Service.IsAllowed()) return null;
+        public object RoutePartial(IContent content, SegmentContext segmentContext)
+        { 
+            if (PageEditing.PageIsInEditMode) return content;
+
+            if (!_pagePreview.Service.IsAllowed()) return content;
 
             var versionSegment = TryGetVersionSegment(segmentContext);
-            if (string.IsNullOrEmpty(versionSegment)) return null;
+            if (string.IsNullOrEmpty(versionSegment)) return content;
 
             var re = new Regex("^[0-9]{1,10}_[0-9]{1,10}$");
-            if (!re.IsMatch(versionSegment)) return null;
+            if (!re.IsMatch(versionSegment)) return content;
 
             var workId = new ContentReference(versionSegment);
-            if (workId == null || workId.Equals(ContentReference.EmptyReference)) return null;
+            if (workId == null || workId.Equals(ContentReference.EmptyReference)) return content;
 
-            return _contentLoader.Service.Get<PageData>(workId);
+            return _contentLoader.Service.Get<IContent>(workId);
         }
 
         private string TryGetVersionSegment(SegmentContext segmentContext)

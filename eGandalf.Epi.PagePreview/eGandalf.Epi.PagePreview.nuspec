@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>eGandalf.Epi.PagePreview</id>
-    <version>2.0.5</version>
+    <version>2.1.0</version>
     <authors>James Stout (@egandalf)</authors>
     <owners>Episerver</owners>
     <projectUrl>https://github.com/egandalf/eGandalf.Epi.PagePreview</projectUrl>
@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An Episerver v11-compatible rewrite of Jacob Khan's code (https://world.episerver.com/blogs/Jacob-Khan/Dates/2016/4/preview-content-in-view-mode/).</description>
     <summary>Adds a partial router allowing draft or prior-versions of page content to be previewed without the authoring UI in a separate browser tab. Can support unpublished version preview for non-authenticated users.</summary>
-    <releaseNotes>Initial release of package.</releaseNotes>
+    <releaseNotes>Support for Commerce products (IContent instead of PageData).</releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>EPiServerModulePackage Preview</tags>
     <dependencies>
