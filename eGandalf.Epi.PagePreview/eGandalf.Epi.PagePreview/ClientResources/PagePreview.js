@@ -25,12 +25,20 @@
                 if (context !== undefined && context.capabilities !== undefined && context.capabilities.isPage == true) {
                     html.set(this.previewHeader, resources["header"]);
                     html.set(this.previewInstructions, resources["instructions"]);
-                    html.set(this.previewLink, '<a class="eg-btn" href="' + context["publicUrl"] + context["id"] + '" target="_blank">' + resources["button"] + '</a>');
+                    html.set(this.previewLink, '<a class="eg-btn" href="' + this.getPublicUrlWithTrailingSlash(context) + context["id"] + '" target="_blank">' + resources["button"] + '</a>');
                 } else {
                     html.set(this.previewHeader, resources["errorheader"]);
                     html.set(this.previewInstructions, resources["errormessage"]);
                     html.set(this.previewLink, '');
                 }
+            }, 
+            getPublicUrlWithTrailingSlash: function(context) {
+                var url = context["publicUrl"];
+                if (!url.endsWith("/")) {
+                    url = url + "/";
+                }
+
+                return url;
             }
         });
     }
