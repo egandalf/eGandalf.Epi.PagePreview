@@ -1,9 +1,7 @@
-﻿using EPiServer.Core;
-using EPiServer.DataAbstraction;
+﻿using EPiServer;
 using EPiServer.Framework;
 using EPiServer.Framework.Initialization;
 using EPiServer.Web.Routing;
-using System.Web.Configuration;
 using System.Web.Routing;
 
 namespace eGandalf.Epi.PagePreview
@@ -14,13 +12,16 @@ namespace eGandalf.Epi.PagePreview
     {
         public void Initialize(InitializationEngine context)
         {
-            var partialRouter = new PreviewPartialRouter();
-            RouteTable.Routes.RegisterPartialRouter<IContent, ContentVersion>(partialRouter);
+            var locator = context.Locate.Advanced;
+            var partialRouter = new PreviewPartialRouter
+            (
+                locator.GetInstance<IPagePreview>(),
+                locator.GetInstance<IPagePreviewEvents>(),
+                locator.GetInstance<IContentLoader>()
+            );
+            RouteTable.Routes.RegisterPartialRouter(partialRouter);
         }
 
-        public void Uninitialize(InitializationEngine context)
-        {
-            //Add uninitialization logic
-        }
+        void IInitializableModule.Uninitialize(InitializationEngine context) { }
     }
 }

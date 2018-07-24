@@ -169,16 +169,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymousPagePreview.cs" />
     <Compile Include="ComponentDefinition.cs" />
     <Compile Include="IPagePreview.cs" />
+    <Compile Include="IPagePreviewEvents.cs" />
     <Compile Include="LocalizedComponentAttribute.cs" />
-    <Compile Include="PagePreview.cs" />
+    <Compile Include="DefaultPagePreview.cs" />
+    <Compile Include="DefaultPagePreviewEvents.cs" />
     <Compile Include="PagePreviewModule.cs" />
     <Compile Include="PreviewPartialRouter.cs" />
     <Compile Include="PreviewRouterInitialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="eGandalf.Epi.PagePreview.nuspec" />
     <None Include="module.config">
       <SubType>Designer</SubType>
     </None>
@@ -197,6 +201,6 @@
   <PropertyGroup>
     <PostBuildEvent>powershell.exe -nologo -noprofile -ExecutionPolicy Bypass -command "&amp;{ if (Test-Path $(ProjectDir)$(ProjectName).zip) { Remove-Item $(ProjectDir)$(ProjectName).zip } }"
 powershell.exe -nologo -noprofile -ExecutionPolicy Bypass -command "&amp;{ Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory('$(ProjectDir)$(ProjectName)', '$(ProjectDir)$(ProjectName).zip'); }"
-nuget pack $(ProjectDir)$(ProjectName).nuspec -IncludeReferencedProjects -OutputDirectory $(SolutionDir)</PostBuildEvent>
+nuget pack $(ProjectDir)$(ProjectName).nuspec -IncludeReferencedProjects  -p "Configuration=$(configuration)" -OutputDirectory $(SolutionDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

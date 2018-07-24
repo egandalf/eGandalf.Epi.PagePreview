@@ -2,7 +2,6 @@
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.Editor;
-using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
 using EPiServer.Web.Routing.Segments;
 using System.Text.RegularExpressions;
@@ -12,13 +11,20 @@ namespace eGandalf.Epi.PagePreview
 {
     public class PreviewPartialRouter : IPartialRouter<IContent, ContentVersion>
     {
-        private Injected<IContentLoader> _contentLoader;
-        private Injected<IPagePreview> _pagePreview;
+        private readonly IContentLoader _contentLoader;
+        private readonly IPagePreview _pagePreview;
+        private readonly IPagePreviewEvents _pagePreviewEvents;
+
+        public PreviewPartialRouter(IPagePreview pagePreview, IPagePreviewEvents pagePreviewEvents, IContentLoader contentLoader)
+        {
+            _contentLoader = contentLoader;
+            _pagePreview = pagePreview;
+            _pagePreviewEvents = pagePreviewEvents;
+        }
 
         public PartialRouteData GetPartialVirtualPath(ContentVersion content, string language, RouteValueDictionary routeValues, RequestContext requestContext)
         {
-            if (PageEditing.PageIsInEditMode) return null;
-
+            if (PageEditing.PageIsInEditMode) { return null; }
             var contentLink = requestContext.GetRouteValue("node", routeValues) as ContentReference;
             return new PartialRouteData
             {
@@ -29,32 +35,31 @@ namespace eGandalf.Epi.PagePreview
 
         public object RoutePartial(IContent content, SegmentContext segmentContext)
         {
-            if (PageEditing.PageIsInEditMode) return null;
-
-            if (!_pagePreview.Service.IsAllowed()) return null;
-
+            if (PageEditing.PageIsInEditMode) { return null; }
+            if (!_pagePreview.IsAllowed()) { return null; }
             var workId = TryGetVersionSegment(ref segmentContext);
-            if (workId == null) return null;
+            if (ContentReference.IsNullOrEmpty(workId)) { return null; }
+            segmentContext.RoutedContentLink = workId;
+            // segmentContext.ContextMode = ContextMode.Preview; // this is bad as it messes up all Urls for images, links ,etc
+            _pagePreviewEvents.PreviewVersionResolved?.Invoke(workId, segmentContext);
 
-            return _contentLoader.Service.Get<IContent>(workId);
+            return _contentLoader.Get<IContent>(workId);
         }
 
         private ContentReference TryGetVersionSegment(ref SegmentContext segmentContext)
         {
             var segment = segmentContext.GetNextValue(segmentContext.RemainingPath);
             var versionSegment = segment.Next;
-
-            if (string.IsNullOrEmpty(versionSegment)) return null;
+            if (string.IsNullOrEmpty(versionSegment)) { return null; }
 
             var re = new Regex("^[0-9]{1,10}_[0-9]{1,10}$");
-            if (!re.IsMatch(versionSegment)) return null;
+            if (!re.IsMatch(versionSegment)) { return null; }
 
             var workId = new ContentReference(versionSegment);
-            if (workId == null || workId.Equals(ContentReference.EmptyReference)) return null;
+            if (workId.Equals(ContentReference.EmptyReference)) { return null; }
 
             segmentContext.RemainingPath = segment.Remaining;
             return workId;
-            //return versionSegment;
         }
     }
 }
