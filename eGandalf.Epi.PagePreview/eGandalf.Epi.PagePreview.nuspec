@@ -20,7 +20,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin/Release/eGandalf.Epi.PagePreview.dll" target="lib\net461" />
+    <file src="bin/$configuration$/eGandalf.Epi.PagePreview.dll" target="lib\net461" />
     <file src="eGandalf.Epi.PagePreview.zip" target="content\modules\_protected\eGandalf.Epi.PagePreview\" />
     <file src="web.config" target="content\modules\_protected\eGandalf.Epi.PagePreview\"/>
     <file src="module.config" target="content\modules\_protected\eGandalf.Epi.PagePreview\"/>
