@@ -39,7 +39,9 @@ namespace eGandalf.Epi.PagePreview
             if (!_pagePreview.IsAllowed()) { return null; }
             var workId = TryGetVersionSegment(ref segmentContext);
             if (ContentReference.IsNullOrEmpty(workId)) { return null; }
-            segmentContext.RoutedContentLink = workId;
+            
+            //segmentContext.RoutedContentLink = workId; // BAD - causes 404 errors for otherwise properly routed content.
+
             // segmentContext.ContextMode = ContextMode.Preview; // this is bad as it messes up all Urls for images, links ,etc
             _pagePreviewEvents.PreviewVersionResolved?.Invoke(workId, segmentContext);
 
