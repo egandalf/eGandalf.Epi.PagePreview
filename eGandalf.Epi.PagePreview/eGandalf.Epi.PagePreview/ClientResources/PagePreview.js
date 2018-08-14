@@ -34,8 +34,10 @@
             }, 
             getPublicUrlWithTrailingSlash: function(context) {
                 var url = context["publicUrl"];
-                if (!url.endsWith("/")) {
-                    url = url + "/";
+                var suffix = "/";
+                if (url.indexOf(suffix, url.length - suffix.length) === -1)
+                {
+                    url = url + suffix;
                 }
 
                 return url;

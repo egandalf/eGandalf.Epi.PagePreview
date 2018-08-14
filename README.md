@@ -163,12 +163,18 @@ namespace eGandalf.Epi.PagePreview
 
         private void ResolvedPreviewId(ContentReference previewVersion, SegmentContext segmentContext)
         {
+            // return if no routed content, or routed content doesn't match preview
+            if (ContentReference.IsNullOrEmpty(segmentContext.RoutedContentLink) ||
+                !previewVersion.CompareToIgnoreWorkID(segmentContext.RoutedContentLink)) return;
+
+            segmentContext.RoutedContentLink = previewVersion;
+            //segmentContext.ContextMode = ContextMode.Preview; //messes up images, a FullPreview enum option would be super!
+
+            // just a simple key with true to tell router to display later in the pipeline
             if (HttpContextAccessor?.Invoke() is HttpContextBase context)
             {
                 context.Items[PreviewKey] = true;
-
             }
-            //segmentContext.ContextMode = ContextMode.Preview; //messes up images, a FullPreview enum option would be super!
         }
     }
 
